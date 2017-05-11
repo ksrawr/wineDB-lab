@@ -55,7 +55,7 @@ int main()
   
      // use wine database
      res = mysql_perform_query(conn, (char *)"use wine");
-     res = mysql_perform_query(conn, (char *)"select name, vintage, score, price, type from wineInfo");
+     res = mysql_perform_query(conn, (char *)"select name, vintage, score, price, type from wineInfo where price between 50 and 100 order by price");
      /*
       * you need to print out the header.  Make sure it it 
       * nicely formated line up.  Modify the cout statement
@@ -72,13 +72,15 @@ int main()
   
    row = mysql_fetch_row(res);
 
-   cout << setw(32) << left << row[0] << setfill(' ') // coulumn (field) #1 - Wine Name
-     << setw(15) << row[1] << setfill(' ') // field #2 - Vintage
-     << setw(15) << row[2] << setfill(' ') // field #3 - Rating
-    << setw(13) << row[3] << setfill(' ') // field #4 - Price
-    << setw(10) << row[4] << setfill(' ') // field #5 - Wine type
-    << endl; // field #7 - UPC
-  
+            while ((row = mysql_fetch_row(res)) !=NULL)
+            {
+             cout << setw(32) << left << row[0] << setfill(' ') // coulumn (field) #1 - Wine Name
+              << setw(15) << row[1] << setfill(' ') // field #2 - Vintage
+              << setw(15) << row[2] << setfill(' ') // field #3 - Rating
+              << setw(13) << row[3] << setfill(' ') // field #4 - Price
+              << setw(10) << row[4] << setfill(' ') // field #5 - Wine type
+              << endl;
+            }
   /* clean up the database result set */
   mysql_free_result(res);
   /* clean up the database link */
