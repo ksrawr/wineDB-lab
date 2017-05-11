@@ -70,15 +70,15 @@ int main()
              left << setw(15) << "Type"
    << endl;
   
-  while ((row = mysql_fetch_row(res)) !=NULL)
-  {
+   row = mysql_fetch_row(res);
+
    cout << setw(32) << left << row[0] << setfill(' ') // coulumn (field) #1 - Wine Name
      << setw(15) << row[1] << setfill(' ') // field #2 - Vintage
      << setw(15) << row[2] << setfill(' ') // field #3 - Rating
     << setw(13) << row[3] << setfill(' ') // field #4 - Price
     << setw(10) << row[4] << setfill(' ') // field #5 - Wine type
     << endl; // field #7 - UPC
-  }
+  
   /* clean up the database result set */
   mysql_free_result(res);
   /* clean up the database link */
